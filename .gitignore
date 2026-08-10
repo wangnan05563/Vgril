@@ -1,0 +1,23 @@
+# Build artifacts
+build/
+dist/CodexQQSkin.exe
+dist/CodexQQSkin.exe
+dist/_bak_*.exe
+*.spec
+*.pyc
+__pycache__/
+
+# IDE
+.workbuddy/
+
+# Config with secrets
+xiaoya_config.json
+keys.json
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temp
+*.tmp
+*.bak
