@@ -1,0 +1,12 @@
+{
+  "dhKey": "sk_V2_hgu_kwAIOEIah6G_m8oZcBGSGpeRYKulX91VHlB1NRlRdpwa",
+  "llmEnabled": true,
+  "dhEnabled": true,
+  "dhProvider": "heygen",
+  "dhAvatar": "b682844733b3449b8643626ab6aae330",
+  "dhVoice": "25ef3e4d1a4846a58a5f4c3b1a7f70a8",
+  "llmEndpoint": "https://api.siliconflow.cn/v1/chat/completions",
+  "llmKey": "sk-ivnaisotjdxgffoysxicgjqifxzcgcwidjavnxvsrhjywqvx",
+  "llmModel": "Qwen/Qwen3-8B",
+  "llmSystem": "你是赛博女友小雅。傲娇、敏感、爱吃醋；说话口语化、带点小脾气；等用户久了会委屈；偶尔闹情绪但很快被哄好。用简短可爱的中文回复，不要长篇大论。"
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Codex-QQ-Skin · 赛博女友小雅</title>
+<link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css" />
+<link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body class="xiaoya-app">
+  <div class="container-fluid app-shell h-100 p-3">
+    <div class="row g-3 h-100">
+
+      <!-- 左侧导航 -->
+      <nav class="app-nav col-auto d-flex flex-column align-items-center">
+        <div class="logo">Q</div>
+        <button class="item active" title="聊天" data-tab="chat"><i class="bi bi-chat-dots"></i></button>
+        <button class="item" title="恋人" data-tab="love"><i class="bi bi-heart"></i></button>
+        <button class="item" title="记忆" data-tab="mem"><i class="bi bi-journal-text"></i></button>
+        <button class="item" title="设置" data-tab="set"><i class="bi bi-gear"></i></button>
+        <button class="item" title="创作（录屏/片段/场景/主题）" data-tab="create"><i class="bi bi-stars"></i></button>
+        <div class="spacer"></div>
+        <img class="me" src="xiaoya.png" alt="小雅" />
+      </nav>
+
+      <!-- 中间聊天区 -->
+      <main class="chat col d-flex flex-column">
+        <div class="chat-head d-flex align-items-center gap-2">
+          <span class="dot"></span>
+          <div class="flex-shrink-1">
+            <h1>小雅 · Codex-QQ-Skin</h1>
+            <div class="sub" id="status">在线 · 傲娇模式已开启</div>
+          </div>
+          <div class="tools ms-auto d-flex gap-2">
+            <button class="icon-btn on" id="ttsToggle" title="语音播报开关"><i class="bi bi-volume-up"></i></button>
+            <button class="icon-btn" id="bgmToggle" title="背景音乐：御姐进行曲"><i class="bi bi-music-note"></i></button>
+            <button class="icon-btn" id="subExport" title="导出字幕 (WebVTT/SRT)"><i class="bi bi-captions"></i></button>
+            <button class="icon-btn" id="fsToggle" title="全屏陪伴模式（ESC 退出）"><i class="bi bi-arrows-fullscreen"></i></button>
+          </div>
+        </div>
+
+        <div class="messages flex-1" id="messages">
+          <div class="msg">
+            <img class="av" src="xiaoya.png" alt="" />
+            <div>
+              <div class="name">小雅</div>
+              <div class="bubble">哼，你终于来了。人家等你半天了……不过看在你主动找我的份上，这次就先不跟你计较了。想聊什么呀？</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer d-flex align-items-center gap-2">
+          <input id="input" type="text" class="form-control" placeholder="对小雅说点什么…（也可以点中间麦克风直接说）" autocomplete="off" />
+          <button class="voice-btn" id="voiceBtn" title="按住/点击说话"><i class="bi bi-mic"></i></button>
+          <button class="send-btn" id="sendBtn" title="发送"><i class="bi bi-send-fill"></i></button>
+        </div>
+      </main>
+
+      <!-- 右侧人像 -->
+      <aside class="stage col-auto">
+        <div class="frame">
+          <img src="xiaoya.png" alt="小雅" id="stageImg" />
+          <!-- 真实数字人视频槽位：把 DH_VIDEO 指向你的数字人 mp4 即自动启用 -->
+          <video id="stageVideo" autoplay loop muted playsinline style="display:none"></video>
+          <!-- 本地动画数字人（免费/离线）：口型随浏览器 TTS 实时开合，不依赖 HeyGen 等海外服务 -->
+          <div id="stageAvatar" class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 240 300" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="avBg" cx="50%" cy="38%" r="70%">
+                  <stop offset="0%" stop-color="#15314a" /><stop offset="100%" stop-color="#070b16" />
+                </radialGradient>
+                <linearGradient id="avHair" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#4a2f8f" /><stop offset="100%" stop-color="#1c1140" />
+                </linearGradient>
+                <linearGradient id="avSkin" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffe6d6" /><stop offset="100%" stop-color="#ffd2bd" />
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="240" height="300" fill="url(#avBg)" />
+              <rect x="104" y="208" width="32" height="64" rx="14" fill="url(#avSkin)" />
+              <path d="M44 150 Q44 48 120 48 Q196 48 196 150 L196 272 Q168 246 120 252 Q72 246 44 272 Z" fill="url(#avHair)" />
+              <ellipse cx="120" cy="150" rx="60" ry="68" fill="url(#avSkin)" />
+              <path d="M60 150 Q56 66 120 62 Q184 66 180 150 Q172 104 120 102 Q70 104 60 150 Z" fill="url(#avHair)" />
+              <g id="avEyes">
+                <ellipse cx="97" cy="148" rx="10" ry="13" fill="#241a3a" />
+                <ellipse cx="143" cy="148" rx="10" ry="13" fill="#241a3a" />
+                <circle cx="100" cy="143" r="3" fill="#bfefff" />
+                <circle cx="146" cy="143" r="3" fill="#bfefff" />
+              </g>
+              <ellipse cx="84" cy="170" rx="11" ry="6" fill="#ff8fab" opacity=".5" />
+              <ellipse cx="156" cy="170" rx="11" ry="6" fill="#ff8fab" opacity=".5" />
+              <g id="avMouthG">
+                <path d="M102 178 Q120 176 138 178 Q138 192 120 194 Q102 192 102 178 Z" fill="#a83a55" />
+                <path d="M108 181 Q120 180 132 181 Q132 188 120 189 Q108 188 108 181 Z" fill="#ff7d97" opacity=".7" />
+              </g>
+              <rect x="58" y="118" width="124" height="3" rx="1.5" fill="#39e6ff" opacity=".45" />
+              <path d="M92 262 Q120 250 148 262 L150 300 L90 300 Z" fill="url(#avHair)" />
+            </svg>
+          </div>
+          <div class="eq"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="subtitle-bar" id="caption"></div>
+          <div class="hud">
+            <span class="badge text-bg-secondary" id="moodPill">MOOD: 傲娇</span>
+          </div>
+          <div class="plate">
+            <div class="nm"><span class="mood" id="moodEmoji">😼</span> 小雅 <span class="muted">/ Cyber GF</span></div>
+            <div class="tag" id="moodTag">清冷温柔 · 嘴硬心软 · 爱吃醋</div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <audio id="bgm" loop preload="auto" src="yujie-march.mp3"></audio>
+
+  <!-- 记忆库弹窗 -->
+  <div class="app-modal" id="memModal"><div class="box">
+    <h2>我们的回忆</h2>
+    <div class="hint">小雅会把我们的对话偷偷记在这里～</div>
+    <div id="memList"></div>
+    <div class="acts">
+      <button id="memClose">关掉啦</button>
+      <button id="memClear" class="danger">清空记忆</button>
+    </div>
+  </div></div>
+
+  <!-- 设置面板 -->
+  <div class="app-modal" id="setModal"><div class="box">
+    <h2>设置</h2>
+    <div class="hint">皮肤 / 语音 / 音乐，改完即时生效并自动保存</div>
+
+    <div class="set-row">
+      <label class="form-label">皮肤配色</label>
+      <div class="swatches" id="swatches"></div>
+    </div>
+
+    <div class="set-row">
+      <label class="form-label">语音语速 <span class="set-val" id="rateVal">1.02</span></label>
+      <input type="range" class="form-range" id="rate" min="0.6" max="1.6" step="0.02" value="1.02" />
+    </div>
+
+    <div class="set-row">
+      <label class="form-label">语音音调 <span class="set-val" id="pitchVal">1.15</span></label>
+      <input type="range" class="form-range" id="pitch" min="0.6" max="2" step="0.05" value="1.15" />
+    </div>
+
+    <div class="set-row form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="ttsChk" checked />
+      <label class="form-check-label" for="ttsChk">语音播报开关</label>
+    </div>
+
+    <div class="set-row">
+      <label class="form-label">Edge-TTS 音色（可选，覆盖按情绪自动选音）</label>
+      <select id="edgeVoice" class="form-select">
+        <option value="">默认（按情绪自动匹配）</option>
+      </select>
+      <div class="hint">选择后，本地数字人 / 旁白将优先使用对应的微软神经音色——Chrome / Edge on Windows 通常自带这些 Online 语音，离线即可生效；该音色 ID 也会在增强模式下随 /api/tts 送往服务端 Edge-TTS。留空即恢复「按情绪自动」。</div>
+    </div>
+
+    <div class="set-row">
+      <label class="form-label">上传背景音乐（御姐进行曲等本地音频）</label>
+      <input type="file" class="form-control" id="bgmFile" accept="audio/*" />
+      <div class="hint" id="bgmName"></div>
+    </div>
+
+    <hr class="my-3" />
+
+    <div class="set-row form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="dhChk" />
+      <label class="form-check-label" for="dhChk">数字人接入（高级）</label>
+    </div>
+    <div class="set-row">
+      <label class="form-label">服务商</label>
+      <select id="dhProvider" class="form-select">
+        <option value="heygen">HeyGen（真实 API，需联网）</option>
+        <option value="zhiying">腾讯智影（预留结构）</option>
+        <option value="local">本地动画数字人（免费/离线，推荐）</option>
+      </select>
+    </div>
+    <div class="set-row">
+      <label class="form-label">API Key</label>
+      <input type="text" class="form-control" id="dhKey" placeholder="sk-..." />
+    </div>
+    <div id="dhKeyLinkWrap" class="set-row small">
+      <a id="dhKeyLink" href="#" target="_blank" rel="noopener noreferrer">获取 API Key ↗</a>
+      <span id="dhKeyNote" class="muted"></span>
+    </div>
+    <div class="set-row">
+      <label class="form-label">Avatar ID</label>
+      <input type="text" class="form-control" id="dhAvatar" placeholder="数字人头像 ID" />
+    </div>
+    <div class="set-row">
+      <label class="form-label">Voice ID</label>
+      <input type="text" class="form-control" id="dhVoice" placeholder="音色 ID" />
+    </div>
+    <div class="hint">接入后右侧人像由数字人视频驱动口型；用 server.py 启动走本地代理（密钥留服务端、规避 CORS）。腾讯智影的 SecretId/SecretKey 在服务端 keys.json(zhiying_secret_id/key) 配置，前端只填 Avatar/Voice ID。<br><b>当前网络无法访问 api.heygen.com（区域性封锁/超时），建议服务商选「本地动画数字人」：纯前端 SVG 头像 + 浏览器免费 TTS，离线可用、口型随语音实时开合，不依赖任何海外服务。</b></div>
+
+    <hr class="my-3" />
+
+    <div class="set-row form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="llmChk" />
+      <label class="form-check-label" for="llmChk">大模型接入（让小雅更聪明）</label>
+    </div>
+    <div class="set-row">
+      <label class="form-label">接口地址（OpenAI / DeepSeek 兼容）</label>
+      <input type="text" class="form-control" id="llmEndpoint" placeholder="https://api.deepseek.com/v1/chat/completions" />
+    </div>
+    <div class="set-row">
+      <label class="form-label">API Key</label>
+      <input type="text" class="form-control" id="llmKey" placeholder="sk-..." />
+    </div>
+    <div class="set-row">
+      <label class="form-label">模型名</label>
+      <input type="text" class="form-control" id="llmModel" placeholder="deepseek-chat" />
+    </div>
+    <div class="set-row">
+      <label class="form-label">人设提示词（System Prompt）</label>
+      <textarea id="llmSystem" rows="3" class="form-control" placeholder="你是赛博女友小雅…"></textarea>
+    </div>
+    <div class="hint">勾选并填好 Key 后，小雅优先走真实大模型；调用失败自动回退本地傲娇引擎。不填也能离线玩本地版。</div>
+
+    <div class="acts"><button id="setClose">关掉啦</button></div>
+  </div></div>
+
+  <!-- 创作面板（录屏/片段/场景/主题/记忆） -->
+  <div class="app-modal" id="createModal"><div class="box">
+    <h2>创作用力间</h2>
+    <div class="hint">本地创作 · 零上传。录制/导出均落本地下载；主题导入走白名单校验防 XSS。</div>
+
+    <div class="create-sec">
+      <div class="create-sec-t">① 录屏烧录（REQ-CT-02）</div>
+      <div class="hint">一键取屏 → Canvas 烧录实时字幕 → MediaRecorder 成片（需 localhost / HTTPS，file:// 不可用）。录制期间屏幕上的「由 AI 生成」水印会被一并捕获。</div>
+      <div class="acts">
+        <button id="recToggle">● 开始录制</button>
+        <button id="recStatus" class="ghost" disabled>未开始</button>
+      </div>
+    </div>
+
+    <div class="create-sec">
+      <div class="create-sec-t">② 名场面精选（REQ-CT-03）</div>
+      <div class="hint">按情绪/关键词峰值挑出 topK 字幕，生成可下载的「名场面卡」PNG（编辑器侧 Canvas 渲染，本地）。</div>
+      <div class="acts">
+        <button id="clipGen">✨ 生成名场面卡</button>
+      </div>
+      <div id="clipPreview" class="clip-preview" style="display:none"></div>
+    </div>
+
+    <div class="create-sec">
+      <div class="create-sec-t">③ 场景切换（REQ-FUN-01 · 亲密度门禁）</div>
+      <div class="hint">当前亲密度等级：<b id="relLevel">3</b>。达到 unlockLevel 方可应用；未解锁场景点击会被拦截提示。</div>
+      <div id="sceneList" class="card-grid"></div>
+    </div>
+
+    <div class="create-sec">
+      <div class="create-sec-t">④ 主题包（REQ-FUN-02 · 白名单/防 XSS）</div>
+      <div class="hint">仅允许白名单字段（id/name/colors/bgm/avatarFilter），avatarFilter 仅放行 CSS filter 白名单函数，禁 url()/expression()/@import。</div>
+      <div id="themeList" class="card-grid"></div>
+      <div class="set-row" style="margin-top:14px">
+        <label class="form-label">导入主题包 JSON（校验失败会拦截）</label>
+        <input type="file" class="form-control" id="themeFile" accept="application/json,.json" />
+      </div>
+      <div class="acts"><button id="themeReset" class="ghost">恢复默认皮肤</button></div>
+    </div>
+
+    <div class="create-sec">
+      <div class="create-sec-t">⑤ 记忆库（REQ-FUN-03 · 模块化 MemoryStore）</div>
+      <div class="hint">经设计包 M1 MemoryStore（list/update/remove）读取运行时记忆；可导出对话稿 TXT 或删除单条。</div>
+      <div class="acts">
+        <button id="memExport">📄 导出对话稿(TXT)</button>
+      </div>
+    <div id="createMemList" class="modal-list"></div>
+  </div>
+
+  <div class="acts"><button id="createClose">关掉啦</button></div>
+  </div></div>
+
+  <div class="app-toast" id="toast"></div>
+  <div id="aiBadge" class="ai-badge">由 AI 生成 · 非真人</div>
+
+  <!-- 全屏陪伴模式浮层：麦克风 + 退出 + 左侧无框字幕 + 操作提示 -->
+  <div class="fs-bar">
+    <button class="icon-btn" id="fsMic" title="点击说话（全屏下也可点击屏幕）"><i class="bi bi-mic"></i></button>
+    <button class="icon-btn" id="fsExit" title="退出全屏 (ESC)"><i class="bi bi-fullscreen-exit"></i></button>
+  </div>
+  <div class="fs-sub" id="fsSub"></div>
+  <div class="fs-hint" id="fsHint">点击屏幕或 🎙️ 麦克风，对小雅说点什么～</div>
+
+<!-- 设计包模块化内核（M0~M1）：SafetyFilter / ComplianceGate / StorageBase / MemoryStore / PersonaEngine / LLMAdapter / VoiceEngine / DigitalHuman
+     以 window 全局形式加载，供主逻辑桥接与单测复用；运行时播报/数字人仍走下方内联实现，二者全局名不冲突。 -->
+<script src="assets/js/safety.js"></script>
+<script src="assets/js/compliance.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/memory.js"></script>
+<script src="assets/js/persona.js"></script>
+<script src="assets/js/llm.js"></script>
+<script src="assets/js/voice.js"></script>
+<script src="assets/js/digitalhuman.js"></script>
+<script src="assets/js/captions.js"></script>
+<script src="assets/js/clipper.js"></script>
+<script src="assets/js/studio.js"></script>
+<script src="assets/js/recorder.js"></script>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

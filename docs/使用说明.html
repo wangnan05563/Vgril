@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Codex-QQ-Skin · 使用说明</title>
+<link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css" />
+<style>
+  body{ font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif; line-height:1.7; }
+  .doc-hero{ padding:56px 0 36px; text-align:center; }
+  .doc-hero h1{ font-weight:800; letter-spacing:.5px; }
+  .doc-hero .lead{ color:var(--bs-secondary-color); }
+  .section-num{
+    width:34px;height:34px;flex:0 0 34px;border-radius:10px;display:grid;place-items:center;
+    font-size:15px;font-weight:800;background:var(--bs-primary);color:#fff;
+  }
+  .mock{ width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--bs-border-color); }
+  pre.doc-code{ background:#0b0e14;border:1px solid var(--bs-border-color);border-radius:12px;
+    padding:14px 16px;overflow:auto;font-size:13px;color:#bfe9ff;line-height:1.6; }
+  pre.doc-code .c{ color:var(--bs-secondary-color); }
+  .feature-icon{ font-size:26px; color:var(--bs-primary); }
+</style>
+</head>
+<body>
+<div class="container py-2">
+
+  <header class="doc-hero">
+    <h1>Codex-QQ-Skin 使用说明</h1>
+    <p class="lead">赛博女友「小雅」· 数字人交互网页 · 零依赖双击运行</p>
+    <div>
+      <span class="badge text-bg-secondary">数字人形象</span>
+      <span class="badge text-bg-secondary">语音对话</span>
+      <span class="badge text-bg-secondary">大模型接入</span>
+      <span class="badge text-bg-secondary">字幕录屏</span>
+    </div>
+  </header>
+
+  <!-- 1. 这是什么 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">1</span>这是什么</h2>
+    <div class="card">
+      <div class="card-body">
+        <p class="mb-2">Codex-QQ-Skin 是一个单文件网页应用，把「固定长相的数字人女友小雅」做成了可交互的桌面伴侣：</p>
+        <ul class="mb-2">
+          <li><b>左侧</b>：功能导航（聊天 / 记忆库 / 设置 / 数字人状态）。</li>
+          <li><b>中间</b>：聊天区，小雅有傲娇、爱吃醋、会委屈的人设，等久了会闹小脾气。</li>
+          <li><b>右侧</b>：小雅人像，说话时会有呼吸 / 口型脉冲动画，可切换为数字人视频。</li>
+          <li><b>底部</b>：圆形语音按钮，支持语音输入（STT）与语音播报（TTS）。</li>
+        </ul>
+        <p class="text-secondary mb-0" style="font-size:14px">未配置任何密钥也能直接玩：默认走<strong>本地人设引擎</strong> + 浏览器语音合成。想要「真人级口型」再接数字人 API 即可。</p>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-body p-2">
+        <svg class="mock" viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="8" width="664" height="224" rx="14" fill="#0f1115" stroke="#2a2f3a"/>
+          <rect x="8" y="8" width="78" height="224" rx="14" fill="#171b22" stroke="#2a2f3a"/>
+          <rect x="94" y="8" width="370" height="224" rx="14" fill="#13161d" stroke="#2a2f3a"/>
+          <rect x="472" y="8" width="200" height="224" rx="14" fill="#15181f" stroke="#2a2f3a"/>
+          <text x="47" y="130" fill="#4f8cff" font-size="12" text-anchor="middle">导航</text>
+          <text x="279" y="30" fill="#9aa3b2" font-size="12" text-anchor="middle">聊天区 · 小雅人设对话</text>
+          <circle cx="279" cy="190" r="20" fill="none" stroke="#7c5cff" stroke-width="2"/>
+          <text x="279" y="195" fill="#7c5cff" font-size="14" text-anchor="middle">🎤</text>
+          <text x="572" y="30" fill="#ff5d8f" font-size="12" text-anchor="middle">小雅人像</text>
+          <rect x="500" y="50" width="144" height="160" rx="10" fill="#1a2350" stroke="#4f8cff" stroke-opacity=".4"/>
+          <text x="572" y="135" fill="#e7ebf0" font-size="13" text-anchor="middle">呼吸/口型</text>
+          <text x="572" y="155" fill="#9aa3b2" font-size="11" text-anchor="middle">动画</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 快速开始 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">2</span>三步跑起来</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="feature-icon mb-2"><i class="bi bi-box-seam"></i></div>
+            <h3 class="h6">① 拿发布包</h3>
+            <p class="text-secondary small mb-0">打开 <code>dist/</code> 文件夹，里面是完整发布包：<code>CodexQQSkin.exe</code>、<code>index.html</code>、<code>xiaoya.png</code> 等。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="feature-icon mb-2"><i class="bi bi-mouse"></i></div>
+            <h3 class="h6">② 双击运行</h3>
+            <p class="text-secondary small mb-0">双击 <code>CodexQQSkin.exe</code>，它会自动在 <code>127.0.0.1:8080</code> 起服务并打开浏览器，无需安装任何依赖。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="feature-icon mb-2"><i class="bi bi-chat-dots"></i></div>
+            <h3 class="h6">③ 开始聊天</h3>
+            <p class="text-secondary small mb-0">浏览器打开后即进入小雅主页，直接打字或点圆形按钮语音对话。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-info mt-3 mb-0">没有 exe？也可以双击 <code>script/start.bat</code>：它会优先用 exe，否则自动用本机 Python 启动 <code>server.py</code>。macOS / Linux 用 <code>script/start.sh</code>。</div>
+  </section>
+
+  <!-- 3. 功能一览 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">3</span>功能一览</h2>
+    <div class="row g-3">
+      <div class="col-md-6"><div class="card h-100"><div class="card-body">
+        <h3 class="h6"><i class="bi bi-heart text-danger"></i> 小雅人设引擎</h3>
+        <p class="text-secondary small mb-0">傲娇、敏感、爱吃醋；你表白她会脸红，冷落她久了她会委屈开场，偶尔闹小脾气。纯本地关键词 + 情绪状态机，离线可用。</p>
+      </div></div></div>
+      <div class="col-md-6"><div class="card h-100"><div class="card-body">
+        <h3 class="h6"><i class="bi bi-volume-up text-primary"></i> 语音播报（TTS）</h3>
+        <p class="text-secondary small mb-0">用浏览器 SpeechSynthesis 朗读小雅的回复，支持语速 / 音调调节。中文语音取决于系统已安装的语言包。</p>
+      </div></div></div>
+      <div class="col-md-6"><div class="card h-100"><div class="card-body">
+        <h3 class="h6"><i class="bi bi-mic text-primary"></i> 语音输入（STT）</h3>
+        <p class="text-secondary small mb-0">点底部圆形按钮说话，浏览器识别为中文文本发给小雅。需要 Chrome / Edge 且授权麦克风。</p>
+      </div></div></div>
+      <div class="col-md-6"><div class="card h-100"><div class="card-body">
+        <h3 class="h6"><i class="bi bi-brain text-primary"></i> 记忆库</h3>
+        <p class="text-secondary small mb-0">对话自动存进浏览器 localStorage，可随时打开弹窗查看历史，也能一键清空。</p>
+      </div></div></div>
+      <div class="col-md-6"><div class="card h-100"><div class="card-body">
+        <h3 class="h6"><i class="bi bi-captions text-primary"></i> 实时字幕 + 导出</h3>
+        <p class="text-secondary small mb-0">小雅说话时底部实时显示字幕，可导出 <code>.vtt</code> / <code>.srt</code> 字幕文件，方便后期录屏烧录。</p>
+      </div></div></div>
+      <div class="col-md-6"><div class="card h-100"><div class="card-body">
+        <h3 class="h6"><i class="bi bi-sliders text-primary"></i> 设置面板</h3>
+        <p class="text-secondary small mb-0">4 套皮肤主题、TTS 语速 / 音调滑块、上传背景音乐（BGM）、数字人高级配置，全部可视化。</p>
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- 4. 大模型 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">4</span>接入真实大模型（可选）</h2>
+    <div class="card">
+      <div class="card-body">
+        <p class="mb-2">默认小雅是「本地人设引擎」。想让她更聪明、能聊任意话题，在设置面板里填写大模型配置即可（OpenAI / DeepSeek 兼容接口）：</p>
+        <ul class="mb-2">
+          <li><code>enabled</code>：打开开关</li>
+          <li><code>endpoint</code>：接口地址，如 <code>https://api.deepseek.com/v1/chat/completions</code></li>
+          <li><code>apiKey</code>：你的密钥</li>
+          <li><code>model</code>：模型名，如 <code>deepseek-chat</code></li>
+          <li><code>system</code>：人设提示词（可保留小雅的傲娇性格）</li>
+        </ul>
+        <p class="text-secondary mb-0" style="font-size:14px">填好后会优先走真实大模型；调用失败自动回退本地引擎，不会「哑火」。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 数字人 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">5</span>接入数字人视频（可选）</h2>
+    <div class="card">
+      <div class="card-body">
+        <p class="mb-3">想让小雅「真人级口型 + 表情」，在设置面板配置数字人，或在服务端 <code>keys.json</code> 放密钥：</p>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <h3 class="h6 text-primary">HeyGen</h3>
+            <pre class="doc-code"><span class="c"># dist/keys.json</span>
+{
+  "heygen": "sk-你的-heygen-key"
+}</pre>
+            <p class="text-secondary small mb-0">面板填：服务商=HeyGen、Avatar ID、Voice ID、API Key。</p>
+          </div>
+          <div class="col-md-6">
+            <h3 class="h6 text-primary">腾讯智影（数智人）</h3>
+            <pre class="doc-code"><span class="c"># dist/keys.json</span>
+{
+  "zhiying_secret_id": "AKID...",
+  "zhiying_secret_key": "...."
+}</pre>
+            <p class="text-secondary small mb-0">密钥留在服务端由 <code>server.py</code> 做 TC3 签名，规避浏览器 CORS 与明文暴露。</p>
+          </div>
+        </div>
+        <div class="alert alert-warning mt-3 mb-0">未配置时，右侧人像用 CSS 呼吸 / 口型脉冲动画「假装说话」，体验不中断；配置后自动切换为真实数字人视频。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 录屏 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">6</span>录屏并烧录字幕</h2>
+    <div class="card">
+      <div class="card-body">
+        <p class="mb-2">想做「小雅开口说话」的视频，流程如下：</p>
+        <ol class="mb-2">
+          <li>在网页里打开字幕条，和小雅对话（字幕实时滚动）。</li>
+          <li>点字幕区的「导出」拿到 <code>.srt</code> 或 <code>.vtt</code>。</li>
+          <li>运行 <code>script/record_burn.ps1</code>：首次会自动装 ffmpeg，用 gdigrab 录全屏，并把字幕烧录进视频（微软雅黑 / 白字描边 / 底部居中）。</li>
+        </ol>
+        <pre class="doc-code"><span class="c"># PowerShell（需以能录屏的权限运行）</span>
+powershell -ExecutionPolicy Bypass -File script/record_burn.ps1</pre>
+        <p class="text-secondary small mb-0">背景音乐「御姐进行曲」在设置面板上传 BGM 即可随对话播放。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 常见问题 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">7</span>常见问题</h2>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead><tr><th>现象</th><th>原因 / 解决</th></tr></thead>
+        <tbody>
+          <tr><td>双击 exe 没反应 / 被拦截</td><td>Windows 可能误报，放行或允许运行；确保 <code>dist/</code> 内文件齐全。</td></tr>
+          <tr><td>语音播报没声音</td><td>系统未装中文语音包；去系统设置添加「中文（简体）语音」，或换 Chrome / Edge。</td></tr>
+          <tr><td>语音输入不工作</td><td>需用 Chrome / Edge，且首次要授权麦克风；部分浏览器不支持 Web Speech STT。</td></tr>
+          <tr><td>端口 8080 被占用</td><td>关闭占用程序，或修改 <code>server.py</code> 里的 <code>PORT</code> 后重新打包。</td></tr>
+          <tr><td>数字人视频不出</td><td>检查 <code>keys.json</code> 密钥是否正确、网络是否可达服务商接口。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 8. 文件清单 -->
+  <section class="mb-5">
+    <h2 class="h4 d-flex align-items-center gap-2 mb-3"><span class="section-num">8</span>发布包文件清单</h2>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead><tr><th>文件</th><th>作用</th></tr></thead>
+        <tbody>
+          <tr><td><code>CodexQQSkin.exe</code></td><td>零依赖启动器（PyInstaller 打包的 server.py），双击自启 + 开浏览器</td></tr>
+          <tr><td><code>index.html</code></td><td>前端主程序（数字人 + 聊天 + 设置 + 字幕）</td></tr>
+          <tr><td><code>xiaoya.png</code></td><td>小雅固定长相底图</td></tr>
+          <tr><td><code>server.py</code></td><td>静态托管 + 数字人反向代理 / 腾讯云签名（源码，便于改端口重打包）</td></tr>
+          <tr><td><code>keys.example.json</code></td><td>密钥模板，复制为 <code>keys.json</code> 填入真实密钥</td></tr>
+          <tr><td><code>script/record_burn.ps1</code></td><td>录屏 + 字幕烧录脚本</td></tr>
+          <tr><td><code>script/start.bat</code> / <code>script/start.sh</code></td><td>Windows / macOS·Linux 启动器</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="text-center text-secondary small py-4">
+    Codex-QQ-Skin · 赛博女友小雅 — 一个本地优先、可离线、可升级的数字人伴侣 Demo<br/>
+    未配置密钥也能玩，想要真人级效果再接入数字人 / 大模型 API。
+  </footer>
+
+</div>
+</body>
+</html>

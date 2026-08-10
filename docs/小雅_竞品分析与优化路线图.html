@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>赛博女友「小雅」· 竞品分析与优化路线图</title>
+<style>
+  :root{
+    --bg:#0A0E1A;
+    --card:#1E2D4A;
+    --card-soft:#16233D;
+    --accent:#4DF0D2;
+    --accent-2:#7C8CFF;
+    --text:#FFFFFF;
+    --muted:#B8C4D9;
+    --warn:#FFB454;
+    --ok:#5BE59A;
+    --line:rgba(124,140,255,.18);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--bg);color:var(--text);
+    font-family:"Inter","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:56px 40px 64px;}
+  /* ---------- Hero ---------- */
+  .hero{margin-bottom:40px;}
+  .hero h1{font-size:clamp(56px,9vw,140px);font-weight:800;letter-spacing:-1px;
+    background:linear-gradient(92deg,#fff 30%,var(--accent) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.02;}
+  .hero .sub{font-size:clamp(28px,4.4vw,48px);font-weight:700;color:var(--accent);margin-top:6px;}
+  .hero .tag{margin-top:14px;font-size:15px;color:var(--muted);letter-spacing:.5px;}
+  .pill{display:inline-block;margin-top:18px;padding:8px 16px;border:1px solid var(--line);
+    border-radius:999px;font-size:13px;color:var(--muted);background:rgba(124,140,255,.06);}
+  /* ---------- Section label ---------- */
+  .sec-label{display:flex;align-items:center;gap:12px;margin:46px 0 20px;}
+  .sec-label .bar{width:4px;height:26px;border-radius:2px;background:var(--accent);}
+  .sec-label h2{font-size:22px;font-weight:700;letter-spacing:.5px;}
+  .sec-label .en{font-size:13px;color:var(--muted);margin-left:4px;}
+  /* ---------- Stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px;
+    display:flex;flex-direction:column;gap:8px;min-height:150px;
+    box-shadow:0 0 0 1px rgba(77,240,210,.04),0 18px 40px -24px rgba(0,0,0,.8);}
+  .stat .v{font-size:clamp(30px,3.4vw,56px);font-weight:800;color:var(--accent);line-height:1;}
+  .stat .l{font-size:14px;color:var(--text);font-weight:600;}
+  .stat .s{font-size:12px;color:var(--muted);margin-top:auto;}
+  /* ---------- Matrix ---------- */
+  .matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .comp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;
+    display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;}
+  .comp.self{background:linear-gradient(160deg,#16331F 0%,#102033 100%);border-color:rgba(91,229,154,.35);}
+  .comp.self::after{content:"本项目";position:absolute;top:14px;right:14px;font-size:11px;
+    color:#0A0E1A;background:var(--ok);padding:3px 9px;border-radius:999px;font-weight:700;}
+  .comp .name{font-size:20px;font-weight:800;color:var(--accent);}
+  .comp.self .name{color:var(--ok);}
+  .comp .row{display:flex;gap:10px;font-size:13.5px;}
+  .comp .k{flex:0 0 64px;color:var(--muted);}
+  .comp .val{color:var(--text);font-weight:500;}
+  /* ---------- Roadmap ---------- */
+  .road{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .mil{background:var(--card-soft);border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+    display:flex;flex-direction:column;gap:10px;min-height:230px;}
+  .mil .tag{font-size:12px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:999px;
+    width:fit-content;background:rgba(124,140,255,.14);color:var(--accent-2);}
+  .mil.m0 .tag{background:rgba(255,180,84,.16);color:var(--warn);}
+  .mil h3{font-size:17px;font-weight:700;}
+  .mil ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:2px;}
+  .mil li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;}
+  .mil li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;
+    background:var(--accent);}
+  .mil.m0 li::before{background:var(--warn);}
+  /* ---------- Positioning footer ---------- */
+  .pos{margin-top:48px;background:linear-gradient(120deg,rgba(77,240,210,.10),rgba(124,140,255,.08));
+    border:1px solid var(--line);border-radius:18px;padding:28px 26px;}
+  .pos h3{font-size:18px;font-weight:700;margin-bottom:16px;color:var(--accent);}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .pil{background:rgba(10,14,26,.5);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .pil .t{font-size:15px;font-weight:700;margin-bottom:6px;}
+  .pil .d{font-size:12.5px;color:var(--muted);}
+  .foot{margin-top:34px;text-align:center;font-size:12px;color:var(--muted);letter-spacing:.4px;}
+  @media (max-width:760px){
+    .wrap{padding:40px 18px 48px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .matrix{grid-template-columns:1fr;}
+    .road{grid-template-columns:repeat(2,1fr);}
+    .pillars{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>赛博女友「小雅」</h1>
+    <div class="sub">竞品分析与优化路线图</div>
+    <div class="tag">CodexQQSkin · 优化需求规格 v1.2 · 数据截至 2026-08</div>
+    <span class="pill">本地优先 · 默认不上云 · 增强可关</span>
+  </header>
+
+  <!-- MARKET STATS -->
+  <div class="sec-label"><span class="bar"></span><h2>市场信号</h2><span class="en">MARKET SIGNALS</span></div>
+  <div class="stats">
+    <div class="stat"><div class="v">¥38.66亿</div><div class="l">中国 AI 情感陪伴</div><div class="s">2025 年市场规模（观研天下）</div></div>
+    <div class="stat"><div class="v">+148.74%</div><div class="l">年复合增长率 CAGR</div><div class="s">中国 2024→2028E（远高于全球）</div></div>
+    <div class="stat"><div class="v">337+</div><div class="l">全球活跃 App</div><div class="s">Top 10% 吃掉 89% 收入</div></div>
+    <div class="stat"><div class="v">&lt;20%</div><div class="l">国内头部 3 日留存</div><div class="s">星野 486万→93万 下载腰斩</div></div>
+  </div>
+
+  <!-- COMPETITOR MATRIX -->
+  <div class="sec-label"><span class="bar"></span><h2>竞品能力矩阵</h2><span class="en">COMPETITOR MATRIX</span></div>
+  <div class="matrix">
+    <div class="comp self">
+      <div class="name">小雅 · 本项目</div>
+      <div class="row"><span class="k">定位</span><span class="val">傲娇伴侣 + 内容创作工作流</span></div>
+      <div class="row"><span class="k">自定义</span><span class="val">单一固定角色（强人设）</span></div>
+      <div class="row"><span class="k">记忆</span><span class="val">弱（本地存储）</span></div>
+      <div class="row"><span class="k">数字人</span><span class="val">智影 / HeyGen 代理</span></div>
+      <div class="row"><span class="k">合规</span><span class="val">缺失（见 M0）</span></div>
+    </div>
+    <div class="comp">
+      <div class="name">Replika</div>
+      <div class="row"><span class="k">定位</span><span class="val">情感支持标杆</span></div>
+      <div class="row"><span class="k">自定义</span><span class="val">关系模式切换</span></div>
+      <div class="row"><span class="k">记忆</span><span class="val">中等</span></div>
+      <div class="row"><span class="k">数字人</span><span class="val">3D 形象 / 语音</span></div>
+      <div class="row"><span class="k">合规</span><span class="val">意大利罚款先例</span></div>
+    </div>
+    <div class="comp">
+      <div class="name">Character.AI</div>
+      <div class="row"><span class="k">定位</span><span class="val">UGC 角色扮演平台</span></div>
+      <div class="row"><span class="k">自定义</span><span class="val">极强（UGC 创建）</span></div>
+      <div class="row"><span class="k">记忆</span><span class="val">弱</span></div>
+      <div class="row"><span class="k">数字人</span><span class="val">无</span></div>
+      <div class="row"><span class="k">合规</span><span class="val">少年自杀诉讼案</span></div>
+    </div>
+    <div class="comp">
+      <div class="name">星野</div>
+      <div class="row"><span class="k">定位</span><span class="val">国内角色社区</span></div>
+      <div class="row"><span class="k">自定义</span><span class="val">强（角色工厂）</span></div>
+      <div class="row"><span class="k">记忆</span><span class="val">弱</span></div>
+      <div class="row"><span class="k">数字人</span><span class="val">有</span></div>
+      <div class="row"><span class="k">合规</span><span class="val">下载腰斩 / 监管承压</span></div>
+    </div>
+    <div class="comp">
+      <div class="name">X Eva</div>
+      <div class="row"><span class="k">定位</span><span class="val">明星 / 网红数字人</span></div>
+      <div class="row"><span class="k">自定义</span><span class="val">中</span></div>
+      <div class="row"><span class="k">记忆</span><span class="val">弱</span></div>
+      <div class="row"><span class="k">数字人</span><span class="val">照片级 / 视频</span></div>
+      <div class="row"><span class="k">合规</span><span class="val">肖像授权风险</span></div>
+    </div>
+    <div class="comp">
+      <div class="name">筑梦岛</div>
+      <div class="row"><span class="k">定位</span><span class="val">剧情陪伴</span></div>
+      <div class="row"><span class="k">自定义</span><span class="val">中</span></div>
+      <div class="row"><span class="k">记忆</span><span class="val">弱</span></div>
+      <div class="row"><span class="k">数字人</span><span class="val">有</span></div>
+      <div class="row"><span class="k">合规</span><span class="val">合规停运警示</span></div>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="sec-label"><span class="bar"></span><h2>优化路线图</h2><span class="en">ROADMAP M0 → M3</span></div>
+  <div class="road">
+    <div class="mil m0">
+      <span class="tag">M0 · 前置首发</span>
+      <h3>合规与安全</h3>
+      <ul>
+        <li>AI 标识 + 防沉迷</li>
+        <li>年龄验证 / 实名</li>
+        <li>情感危机人工接管</li>
+        <li>训练授权默认拒绝</li>
+        <li>内容过滤 + 数据可清除</li>
+      </ul>
+    </div>
+    <div class="mil">
+      <span class="tag">M1 · 做深陪伴</span>
+      <h3>长期关系感</h3>
+      <ul>
+        <li>长期语义记忆</li>
+        <li>情绪状态机升级</li>
+        <li>关系进度系统</li>
+        <li>人设轻量微调</li>
+        <li>语音情感化 + 可打断</li>
+      </ul>
+    </div>
+    <div class="mil">
+      <span class="tag">M2 · 放大独特性</span>
+      <h3>创作护城河</h3>
+      <ul>
+        <li>场景剧情模式</li>
+        <li>记忆库可视化</li>
+        <li>字幕 / 录屏一键化</li>
+        <li>片段精选分享</li>
+      </ul>
+    </div>
+    <div class="mil">
+      <span class="tag">M3 · 探索</span>
+      <h3>边界延伸</h3>
+      <ul>
+        <li>轻量增值</li>
+        <li>移动端</li>
+        <li>IP 衍生</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- POSITIONING -->
+  <div class="pos">
+    <h3>差异化定位 · 三条护城河</h3>
+    <div class="pillars">
+      <div class="pil"><div class="t">隐私合规底线</div><div class="d">本地优先、数据不出本机，从技术特性升级为对外承诺，对抗云端训练默认。</div></div>
+      <div class="pil"><div class="t">长期关系感</div><div class="d">用"养成的她"的深度对抗竞品的角色数量广度，破解 3 日留存困局。</div></div>
+      <div class="pil"><div class="t">创作工作流</div><div class="d">字幕导出 + 录屏烧录的"陪伴 + 创作"复合定位，竞品几乎空白的生态位。</div></div>
+    </div>
+  </div>
+
+  <div class="foot">CodexQQSkin 优化需求规格 v1.2 · 配套文档《优化需求规格说明书.md》· 可视化看板（HTML 版）· 数据来源见图内 §2.6</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{
+  "project": {
+    "name": "CodexQQSkin",
+    "description": "赛博女友小雅 - 静态服务 + HeyGen/腾讯智影(数智人) 反向代理",
+    "root": "."
+  },
+  "encoding": {
+    "bat_strategy": "ascii",
+    "bat_chcp": "65001",
+    "ps1_output_encoding": "UTF8",
+    "ps1_bom": true,
+    "line_ending": "CRLF"
+  },
+  "service": {
+    "name": "CodexQQSkin Server",
+    "port": 8080,
+    "module": "server.py",
+    "exe_name": "CodexQQSkin.exe",
+    "image_name": "CodexQQSkin.exe",
+    "window_title": "CodexQQSkin Server",
+    "log_dir": "logs",
+    "log_file": "logs/server.log",
+    "stop_timeout_seconds": 10
+  },
+  "runtime": {
+    "python_candidates": [
+      "C:\\Users\\hspcadmin\\.workbuddy\\binaries\\python\\versions\\3.13.12\\python.exe",
+      "python3",
+      "python",
+      "py"
+    ],
+    "python_min_version": [3, 10],
+    "prefer_pyinstaller_present": true
+  },
+  "build": {
+    "dist_dir": "dist",
+    "work_dir": "build",
+    "spec_dir": "build",
+    "entry": "run_asgi.py",
+    "exe_name": "CodexQQSkin.exe",
+    "onefile": true,
+    "console": false,
+    "icon": "",
+    "hidden_imports": [
+      "uvicorn.logging",
+      "uvicorn.loops.asyncio",
+      "uvicorn.protocols.http.auto",
+      "uvicorn.protocols.websockets.auto",
+      "uvicorn.workers"
+    ],
+    "collect_submodules": [
+      "fastapi",
+      "starlette",
+      "pydantic",
+      "pydantic_core",
+      "uvicorn",
+      "anyio",
+      "h11",
+      "click"
+    ],
+    "add_data": [
+      ["index.html", "."],
+      ["xiaoya.png", "."],
+      ["keys.example.json", "."],
+      ["dist/assets", "assets"]
+    ],
+    "companion_files": [
+      "start.bat",
+      "record_burn.ps1",
+      "使用说明.html",
+      "xiaoya.png",
+      "keys.example.json"
+    ]
+  },
+  "frontend": {
+    "source_dir": ".",
+    "dist_dir": "dist",
+    "minify": true,
+    "minify_target": "index.html",
+    "protect_tags": ["script", "style", "pre", "textarea"],
+    "assets": [
+      "index.html",
+      "xiaoya.png",
+      "keys.example.json",
+      "使用说明.html",
+      "assets"
+    ]
+  },
+  "release": {
+    "output": "CodexQQSkin_release.zip",
+    "source_dir": "dist",
+    "flatten": true,
+    "exclude": [
+      "xiaoya_config.json",
+      "_bak_*"
+    ]
+  }
+}

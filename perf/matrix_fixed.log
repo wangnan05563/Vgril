@@ -1,0 +1,241 @@
+=== RUN static 50 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using static.jmx
+Starting standalone test @ August 9, 2026 8:26:39 PM CST (1786278399766)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  19329 in 00:00:17 = 1124.0/s Avg:    19 Min:     1 Max:   131 Err:     0 (0.00%) Active: 43 Started: 43 Finished: 0
+summary +  36947 in 00:00:30 = 1231.6/s Avg:    40 Min:     8 Max:   117 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary =  56276 in 00:00:47 = 1192.4/s Avg:    33 Min:     1 Max:   131 Err:     0 (0.00%)
+summary +  16800 in 00:00:13 = 1292.8/s Avg:    38 Min:     4 Max:    91 Err:     0 (0.00%) Active: 0 Started: 50 Finished: 50
+summary =  73076 in 00:01:00 = 1214.1/s Avg:    34 Min:     1 Max:   131 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:27:42 PM CST (1786278462995)
+... end of run
+=== DONE static 50 exit=0 ===
+=== RUN static 100 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using static.jmx
+Starting standalone test @ August 9, 2026 8:27:47 PM CST (1786278467019)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  11606 in 00:00:11 = 1088.6/s Avg:    24 Min:     1 Max:   200 Err:     0 (0.00%) Active: 53 Started: 53 Finished: 0
+summary +  36839 in 00:00:30 = 1228.0/s Avg:    75 Min:     2 Max:   216 Err:     0 (0.00%) Active: 100 Started: 100 Finished: 0
+summary =  48445 in 00:00:41 = 1191.4/s Avg:    63 Min:     1 Max:   216 Err:     0 (0.00%)
+summary +  22614 in 00:00:20 = 1155.7/s Avg:    86 Min:     2 Max:   281 Err:     0 (0.00%) Active: 0 Started: 100 Finished: 100
+summary =  71059 in 00:01:00 = 1179.8/s Avg:    70 Min:     1 Max:   281 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:28:49 PM CST (1786278529569)
+... end of run
+=== DONE static 100 exit=0 ===
+=== RUN static 200 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using static.jmx
+Starting standalone test @ August 9, 2026 8:28:54 PM CST (1786278534592)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +   1572 in 00:00:02 =  714.2/s Avg:    12 Min:     2 Max:    90 Err:     0 (0.00%) Active: 21 Started: 21 Finished: 0
+summary +  31198 in 00:00:30 = 1040.0/s Avg:   140 Min:     2 Max:   635 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+summary =  32770 in 00:00:32 = 1017.7/s Avg:   133 Min:     2 Max:   635 Err:     0 (0.00%)
+summary +  29942 in 00:00:28 = 1061.2/s Avg:   188 Min:     1 Max:   741 Err:     0 (0.00%) Active: 0 Started: 200 Finished: 200
+summary =  62712 in 00:01:00 = 1038.0/s Avg:   159 Min:     1 Max:   741 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:29:58 PM CST (1786278598216)
+... end of run
+=== DONE static 200 exit=0 ===
+=== RUN config_get 50 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using config_get.jmx
+Starting standalone test @ August 9, 2026 8:30:03 PM CST (1786278603233)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  92966 in 00:00:24 = 3873.7/s Avg:     7 Min:     0 Max:   578 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary + 117826 in 00:00:30 = 3927.5/s Avg:    12 Min:     0 Max:    98 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary = 210792 in 00:00:54 = 3903.6/s Avg:    10 Min:     0 Max:   578 Err:     0 (0.00%)
+summary +  24294 in 00:00:06 = 3936.8/s Avg:    12 Min:     0 Max:    64 Err:     0 (0.00%) Active: 0 Started: 50 Finished: 50
+summary = 235086 in 00:01:00 = 3907.0/s Avg:    10 Min:     0 Max:   578 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:31:06 PM CST (1786278666172)
+... end of run
+=== DONE config_get 50 exit=0 ===
+=== RUN config_get 100 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using config_get.jmx
+Starting standalone test @ August 9, 2026 8:31:12 PM CST (1786278672601)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  50185 in 00:00:13 = 3722.4/s Avg:     8 Min:     0 Max:   176 Err:     0 (0.00%) Active: 67 Started: 67 Finished: 0
+summary + 127002 in 00:00:30 = 4233.4/s Avg:    22 Min:     0 Max:   155 Err:     0 (0.00%) Active: 100 Started: 100 Finished: 0
+summary = 177187 in 00:00:43 = 4075.0/s Avg:    18 Min:     0 Max:   176 Err:     0 (0.00%)
+summary +  75322 in 00:00:17 = 4491.7/s Avg:    22 Min:     0 Max:   130 Err:     0 (0.00%) Active: 0 Started: 100 Finished: 100
+summary = 252509 in 00:01:00 = 4191.0/s Avg:    19 Min:     0 Max:   176 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:32:16 PM CST (1786278736769)
+... end of run
+=== DONE config_get 100 exit=0 ===
+=== RUN config_get 200 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using config_get.jmx
+Starting standalone test @ August 9, 2026 8:32:21 PM CST (1786278741728)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  16015 in 00:00:05 = 3018.3/s Avg:     7 Min:     0 Max:  1905 Err:     0 (0.00%) Active: 51 Started: 51 Finished: 0
+summary + 117596 in 00:00:30 = 3919.9/s Avg:    41 Min:     0 Max:  8993 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+summary = 133611 in 00:00:35 = 3784.4/s Avg:    37 Min:     0 Max:  8993 Err:     0 (0.00%)
+summary + 100567 in 00:00:25 = 3981.6/s Avg:    49 Min:     0 Max:   736 Err:     0 (0.00%) Active: 0 Started: 200 Finished: 200
+summary = 234178 in 00:01:01 = 3866.6/s Avg:    42 Min:     0 Max:  8993 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:33:25 PM CST (1786278805258)
+... end of run
+=== DONE config_get 200 exit=0 ===
+=== RUN config_post 50 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using config_post.jmx
+Starting standalone test @ August 9, 2026 8:33:30 PM CST (1786278810773)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +      1 in 00:00:01 =    1.2/s Avg:    79 Min:    79 Max:    79 Err:     0 (0.00%) Active: 2 Started: 2 Finished: 0
+summary +   4436 in 00:00:25 =  178.2/s Avg:   173 Min:     4 Max:   482 Err:   167 (3.76%) Active: 50 Started: 50 Finished: 0
+summary =   4437 in 00:00:26 =  172.4/s Avg:   173 Min:     4 Max:   482 Err:   167 (3.76%)
+summary +   5768 in 00:00:30 =  192.2/s Avg:   259 Min:   150 Max:   526 Err:   165 (2.86%) Active: 50 Started: 50 Finished: 0
+summary =  10205 in 00:00:56 =  183.1/s Avg:   222 Min:     4 Max:   526 Err:   332 (3.25%)
+summary +    784 in 00:00:05 =  162.4/s Avg:   307 Min:   163 Max:   496 Err:    18 (2.30%) Active: 0 Started: 50 Finished: 50
+summary =  10989 in 00:01:01 =  181.4/s Avg:   228 Min:     4 Max:   526 Err:   350 (3.19%)
+Tidying up ...    @ August 9, 2026 8:34:34 PM CST (1786278874844)
+... end of run
+=== DONE config_post 50 exit=0 ===
+=== RUN config_post 100 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using config_post.jmx
+Starting standalone test @ August 9, 2026 8:34:40 PM CST (1786278880499)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +   2969 in 00:00:17 =  179.7/s Avg:   221 Min:     4 Max:   606 Err:    41 (1.38%) Active: 82 Started: 82 Finished: 0
+summary +   6034 in 00:00:30 =  201.1/s Avg:   489 Min:   382 Max:   692 Err:    56 (0.93%) Active: 100 Started: 100 Finished: 0
+summary =   9003 in 00:00:47 =  193.5/s Avg:   401 Min:     4 Max:   692 Err:    97 (1.08%)
+summary +   2484 in 00:00:14 =  172.7/s Avg:   575 Min:   379 Max:   934 Err:    60 (2.42%) Active: 0 Started: 100 Finished: 100
+summary =  11487 in 00:01:01 =  188.6/s Avg:   438 Min:     4 Max:   934 Err:   157 (1.37%)
+Tidying up ...    @ August 9, 2026 8:35:44 PM CST (1786278944384)
+... end of run
+=== DONE config_post 100 exit=0 ===
+=== RUN config_post 200 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using config_post.jmx
+Starting standalone test @ August 9, 2026 8:35:53 PM CST (1786278953208)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +    430 in 00:00:03 =  127.0/s Avg:   114 Min:     5 Max:   305 Err:    45 (10.47%) Active: 32 Started: 32 Finished: 0
+summary +   4776 in 00:00:30 =  159.2/s Avg:   934 Min:   173 Max:  1496 Err:    75 (1.57%) Active: 200 Started: 200 Finished: 0
+summary =   5206 in 00:00:33 =  155.9/s Avg:   866 Min:     5 Max:  1496 Err:   120 (2.31%)
+summary +   4596 in 00:00:28 =  164.8/s Avg:  1219 Min:   762 Max:  1742 Err:   139 (3.02%) Active: 0 Started: 200 Finished: 200
+summary =   9802 in 00:01:01 =  160.0/s Avg:  1032 Min:     5 Max:  1742 Err:   259 (2.64%)
+Tidying up ...    @ August 9, 2026 8:36:57 PM CST (1786279017894)
+... end of run
+=== DONE config_post 200 exit=0 ===
+=== RUN heygen_proxy 50 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using heygen_proxy.jmx
+Starting standalone test @ August 9, 2026 8:37:03 PM CST (1786279023082)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  33571 in 00:00:24 = 1381.8/s Avg:    21 Min:    11 Max:   194 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary +  47721 in 00:00:30 = 1590.7/s Avg:    31 Min:    11 Max:   218 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary =  81292 in 00:00:54 = 1497.2/s Avg:    27 Min:    11 Max:   218 Err:     0 (0.00%)
+summary +   8902 in 00:00:06 = 1510.6/s Avg:    32 Min:    11 Max:   197 Err:     0 (0.00%) Active: 0 Started: 50 Finished: 50
+summary =  90194 in 00:01:00 = 1498.5/s Avg:    27 Min:    11 Max:   218 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:38:05 PM CST (1786279085894)
+... end of run
+=== DONE heygen_proxy 50 exit=0 ===
+=== RUN heygen_proxy 100 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using heygen_proxy.jmx
+Starting standalone test @ August 9, 2026 8:38:11 PM CST (1786279091357)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  17605 in 00:00:16 = 1134.3/s Avg:    32 Min:    11 Max:  1223 Err:     0 (0.00%) Active: 75 Started: 75 Finished: 0
+summary +  41198 in 00:00:30 = 1373.3/s Avg:    71 Min:    11 Max: 12693 Err:     1 (0.00%) Active: 100 Started: 100 Finished: 0
+summary =  58803 in 00:00:46 = 1291.8/s Avg:    59 Min:    11 Max: 12693 Err:     1 (0.00%)
+summary +  17473 in 00:00:15 = 1132.6/s Avg:    85 Min:    12 Max:  1962 Err:     0 (0.00%) Active: 0 Started: 100 Finished: 100
+summary =  76276 in 00:01:01 = 1251.5/s Avg:    65 Min:    11 Max: 12693 Err:     1 (0.00%)
+Tidying up ...    @ August 9, 2026 8:39:15 PM CST (1786279155429)
+... end of run
+=== DONE heygen_proxy 100 exit=0 ===
+=== RUN heygen_proxy 200 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using heygen_proxy.jmx
+Starting standalone test @ August 9, 2026 8:39:21 PM CST (1786279161217)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +   6026 in 00:00:06 = 1004.5/s Avg:    24 Min:    11 Max:   857 Err:     0 (0.00%) Active: 55 Started: 55 Finished: 0
+summary +  46389 in 00:00:30 = 1546.4/s Avg:   106 Min:    11 Max: 13582 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+summary =  52415 in 00:00:36 = 1456.1/s Avg:    97 Min:    11 Max: 13582 Err:     0 (0.00%)
+summary +  39520 in 00:00:25 = 1597.7/s Avg:   124 Min:    14 Max:  1555 Err:     0 (0.00%) Active: 0 Started: 200 Finished: 200
+summary =  91935 in 00:01:01 = 1513.8/s Avg:   108 Min:    11 Max: 13582 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:40:24 PM CST (1786279224735)
+... end of run
+=== DONE heygen_proxy 200 exit=0 ===
+=== RUN llm_real 20 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using llm_real.jmx
+Starting standalone test @ August 9, 2026 8:40:31 PM CST (1786279231510)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +     35 in 00:00:25 =    1.4/s Avg:  5719 Min:  2361 Max: 11414 Err:     0 (0.00%) Active: 20 Started: 20 Finished: 0
+summary +     76 in 00:00:30 =    2.5/s Avg:  7662 Min:  2845 Max: 25900 Err:     0 (0.00%) Active: 20 Started: 20 Finished: 0
+summary =    111 in 00:00:56 =    2.0/s Avg:  7050 Min:  2361 Max: 25900 Err:     0 (0.00%)
+summary +     28 in 00:00:38 =    0.7/s Avg: 13573 Min:  3277 Max: 42735 Err:     0 (0.00%) Active: 0 Started: 20 Finished: 20
+summary =    139 in 00:01:34 =    1.5/s Avg:  8364 Min:  2361 Max: 42735 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:42:08 PM CST (1786279328479)
+... end of run
+=== DONE llm_real 20 exit=0 ===
+=== RUN zhiying 50 60 ===
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+Creating summariser <summary>
+Created the tree successfully using zhiying.jmx
+Starting standalone test @ August 9, 2026 8:42:13 PM CST (1786279333167)
+Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+summary +  45039 in 00:00:14 = 3203.1/s Avg:     5 Min:     0 Max:   601 Err:     0 (0.00%) Active: 35 Started: 35 Finished: 0
+summary + 126079 in 00:00:30 = 4202.6/s Avg:    11 Min:     0 Max:    89 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+summary = 171118 in 00:00:44 = 3883.7/s Avg:     9 Min:     0 Max:   601 Err:     0 (0.00%)
+summary +  70579 in 00:00:16 = 4374.3/s Avg:    11 Min:     0 Max:    89 Err:     0 (0.00%) Active: 0 Started: 50 Finished: 50
+summary = 241697 in 00:01:00 = 4015.1/s Avg:    10 Min:     0 Max:   601 Err:     0 (0.00%)
+Tidying up ...    @ August 9, 2026 8:43:16 PM CST (1786279396136)
+... end of run
+=== DONE zhiying 50 exit=0 ===
+MATRIX_FIXED_DONE

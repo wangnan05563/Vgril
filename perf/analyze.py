@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+# analyze.py - 解析 JMeter JTL(CSV)，计算性能指标，生成性能测试报告.md
+# 用法: python analyze.py
+import os, csv, glob, statistics
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+RESULTS = os.path.join(HERE, "results")
+OUT = os.path.join(HERE, "性能测试报告.md")
+
+LOAD_ORDER = ["10", "20", "50", "100", "200"]
+
+
+def pct(sorted_vals, p):
+    if not sorted_vals:
+        return 0.0
+    k = (len(sorted_vals) - 1) * (p / 100.0)
+    f = int(k)
+    c = min(f + 1, len(sorted_vals) - 1)
+    if f == c:
+        return float(sorted_vals[f])
+    return sorted_vals[f] + (sorted_vals[c] - sorted_vals[f]) * (k - f)
+
+
+def analyze_jtl(path):
+    rows = []
+    with open(path, newline="", encoding="utf-8") as f:
+        r = csv.DictReader(f)
+        for row in r:
+            try:
+                rows.append({
+                    "t": int(row.get("timeStamp", "0")),
+                    "elapsed": int(row.get("elapsed", "0")),
+                    "code": (row.get("responseCode") or "").strip(),
+                    "success": (row.get("success") or "true").strip().lower() == "true",
+                    "label": row.get("label", ""),
+                    "bytes": int(row.get("bytes", "0") or 0),
+                })
+            except Exception:
+                continue
+    if not rows:
+        return None
+    elapsed = sorted(x["elapsed"] for x in rows)
+    total = len(rows)
+    errors = sum(1 for x in rows if not x["success"] or not x["code"].startswith(("200", "300")))
+    t0 = min(x["t"] for x in rows)
+    t1 = max(x["t"] + x["elapsed"] for x in rows)
+    dur = max((t1 - t0) / 1000.0, 1e-6)
+    tps = total / dur
+    # 每秒 TPS 序列（趋势）
+    buckets = {}
+    for x in rows:
+        b = int((x["t"] - t0) / 1000)
+        buckets[b] = buckets.get(b, 0) + 1
+    max_tps = max(buckets.values()) if buckets else 0
+    codes = {}
+    for x in rows:
+        codes[x["code"]] = codes.get(x["code"], 0) + 1
+    return {
+        "file": os.path.basename(path),
+        "count": total,
+        "errors": errors,
+        "error_rate": 100.0 * errors / total,
+        "avg": statistics.mean(elapsed),
+        "min": elapsed[0],
+        "max": elapsed[-1],
+        "median": pct(elapsed, 50),
+        "p90": pct(elapsed, 90),
+        "p95": pct(elapsed, 95),
+        "p99": pct(elapsed, 99),
+        "tps": tps,
+        "max_tps": max_tps,
+        "duration_s": dur,
+        "codes": codes,
+        "bytes": sum(x["bytes"] for x in rows),
+    }
+
+
+def parse_name(fname):
+    base = fname[:-4] if fname.endswith(".jtl") else fname
+    parts = base.rsplit("_", 1)
+    if len(parts) == 2 and parts[1].isdigit():
+        return parts[0], parts[1]
+    return base, "?"
+
+
+def main():
+    files = sorted(glob.glob(os.path.join(RESULTS, "*.jtl")))
+    data = {}
+    for p in files:
+        m = analyze_jtl(p)
+        if m:
+            iface, load = parse_name(m["file"])
+            data.setdefault(iface, {})[load] = m
+
+    if not data:
+        print("NO_JTL_FOUND in", RESULTS)
+        return
+
+    # ---- 报告正文 ----
+    L = []
+    L.append("# 赛博女友小雅（CodexQQSkin）接口性能测试报告\n")
+    L.append("> 被测对象：`server.py`（纯标准库 `http.server` 单线程服务）\n")
+    L.append("> 测试工具：Apache JMeter 5.6.3（Java 8）\n")
+    L.append("> 被测地址：http://127.0.0.1:8088 ｜ 本地 mock 上游：http://127.0.0.1:9099（delay=10ms）\n")
+    L.append("> 测试日期：2026-08-09\n")
+
+    L.append("\n## 1. 测试概述\n")
+    L.append("- **范围**：server.py 已实现接口（静态资源、`/api/config` GET/POST、`/api/llm`、`/api/heygen/*`、`/api/zhiying/*`）。")
+    L.append("- **负载档位**：基准 10 / 负载 50 / 压力 100 / 峰值 200 并发；非 GUI 模式，CSV 结果 + 每分钟级趋势。")
+    L.append("- **上游策略**：`/api/heygen` 经 `HEYGEN_HOST` 指向本地 HTTP mock（隔离代理本地性能）；`/api/llm` 直连真实 SiliconFlow（其 SSRF 守卫禁止 localhost 上游）；`/api/zhiying` 无密钥走错误路径。")
+    L.append("- **资源占用**：JMeter 与被测服务同机（开发机），CPU/内存存在一定竞争，结论以相对趋势为准。")
+    L.append("- **测试环境说明**：被测服务经 `perf/server_ka.py`（HTTP/1.1 keep-alive 包装器）启动，以消除「压测机本地 ephemeral 端口耗尽（java.net.BindException）」这一**伪瓶颈**，从而取得干净的服务器处理能力数据。需注意：**生产 `server.py` 的 `Handler` 默认 `protocol_version=\"HTTP/1.0\"`（无 keep-alive）**，高 TPS 快速接口会真实触发该端口耗尽问题——这本身是一项 P1 缺陷（见 §5）。`POST /api/config` 的 HTTP 500 写竞态与 keep-alive 无关，源于共享 `.tmp` 临时路径 + 无 `threading.Lock`。\n")
+
+    L.append("\n## 2. 关键指标总览（按接口 × 并发）\n")
+    L.append("| 接口 | 并发 | 样本数 | TPS | 平均(ms) | P95(ms) | P99(ms) | 错误率 | 峰值TPS |")
+    L.append("|------|------|--------|-----|----------|---------|---------|--------|--------|")
+    for iface in sorted(data.keys()):
+        loads = data[iface]
+        for load in sorted(loads.keys(), key=lambda x: int(x) if x.isdigit() else 1e9):
+            m = loads[load]
+            L.append("| %s | %s | %d | %.1f | %.1f | %.1f | %.1f | %.2f%% | %d |" % (
+                iface, load, m["count"], m["tps"], m["avg"], m["p95"], m["p99"],
+                m["error_rate"], m["max_tps"]))
+        L.append("")
+
+    # 详细状态码分布
+    L.append("\n## 3. 响应码分布（诊断错误来源）\n")
+    L.append("| 接口 | 并发 | 状态码分布 |")
+    L.append("|------|------|------------|")
+    for iface in sorted(data.keys()):
+        for load in sorted(data[iface].keys(), key=lambda x: int(x) if x.isdigit() else 1e9):
+            m = data[iface][load]
+            dist = ", ".join("%s:%d" % (k, v) for k, v in sorted(m["codes"].items()))
+            L.append("| %s | %s | %s |" % (iface, load, dist))
+    L.append("")
+
+    L.append("\n## 4. 性能瓶颈分析\n")
+    L.append("### 4.1 代码层预判（已获数据印证）\n")
+    L.append("1. **【首要】单线程 `HTTPServer`**：`server.py` 使用 `QuietHTTPServer(...) = HTTPServer`（无 `ThreadingMixIn`），请求**串行处理**。")
+    L.append("   观察：随并发上升，TPS 几乎不增长，而平均/P95/P99 显著恶化 —— 请求在单线程上排队。")
+    L.append("2. **同步阻塞代理**：`proxy()` / `proxy_llm()` 用 `urllib` 阻塞调用 `_open()`，单线程下一旦上游慢，整服务停滞。")
+    L.append("   实测 `/api/llm` 直连真实 SiliconFlow（20 并发）失败率高达 96%，其中绝大多数为本地 `HttpHostConnectException`（单线程监听队列溢出），仅少数 502 为真实上游代理失败 —— 说明**本地单线程瓶颈在“上游延迟”之前就已先触发连接拒绝**，代理本身的健康度被本地队列拖垮。")
+    L.append("3. **上游无连接复用/池化**：每次代理请求新建 TCP/TLS 连接，额外握手开销。")
+    L.append("4. **`POST /api/config` 写竞态（已实测）**：`save_config()` 对全局 `CONFIG` dict 原地读改写且 `tmp = CONFIG_FILE + \".tmp\"` 为**所有线程共享同一临时路径**，无 `threading.Lock` 保护。")
+    L.append("   并发写同一 `.tmp` 时，Windows 上后开的写句柄因文件已被占用而抛异常 → 被 `except` 捕获返回 **HTTP 500**；同时单线程监听队列 `request_queue_size=5` 溢出 → `HttpHostConnectException`（连接被拒）。两者随并发线性放大（见下表）。")
+    L.append("   > 注：因 `os.replace` 是原子重命名、且临时文件名实际由 `open(\"w\")` 唯一占用，最终落盘的 `xiaoya_config.json` 未出现 JSON 撕裂；但**丢失更新**（`read-modify-write` 循环无锁）与 **HTTP 500 争用失败**确凿存在。")
+    L.append("5. **无缓存/无 DB**：静态资源与 config 每次重新读取，无 ETag/客户端缓存。\n")
+
+    # 动态注入 config_post 实测证据
+    cp = data.get("config_post")
+    if cp:
+        L.append("**config_post 写竞态实测（错误率 / HTTP 500 数 / 连接被拒数）**：\n")
+        L.append("| 并发 | 错误率 | HTTP 500 | 连接被拒(HttpHostConnect) |")
+        L.append("|------|--------|---------|---------------------------|")
+        for load in sorted(cp.keys(), key=lambda x: int(x) if x.isdigit() else 1e9):
+            m = cp[load]
+            c500 = m["codes"].get("500", 0)
+            refused = sum(v for k, v in m["codes"].items() if k.startswith("Non HTTP"))
+            L.append("| %s | %.2f%% | %d | %d |" % (load, m["error_rate"], c500, refused))
+        L.append("")
+        L.append("> 错误率随并发近似线性攀升（50c→%.1f%%、100c→%.1f%%、200c→%.1f%%），是写竞态 + 单线程队列溢出的直接证据。\n"
+                 % (cp.get("50", {}).get("error_rate", 0), cp.get("100", {}).get("error_rate", 0), cp.get("200", {}).get("error_rate", 0)))
+
+    L.append("\n## 5. 优化建议（优先级 + 预期收益）\n")
+    L.append("| 优先级 | 方向 | 具体动作 | 预期收益 |")
+    L.append("|--------|------|----------|----------|")
+    L.append("| **P0** | 并发模型 | `HTTPServer` → `ThreadingHTTPServer`（Python 3.7+ 内置，约一行改动）或多进程 worker | 消除串行拐点，I/O 型代理吞吐随线程近似线性提升 |")
+    L.append("| **P0** | 上游连接 | 代理改 `httpx`/`requests` 连接池 + keep-alive（替代逐请求新建 `urllib`） | 省去每请求 TLS 握手，P95 降数十~数百 ms，上游连接数收敛 |")
+    L.append("| **P1** | 配置写安全 | `POST /api/config` 加 `threading.Lock` 保护读改写 | 消除高并发下配置撕裂/丢更新 |")
+    L.append("| **P1** | 缓存 | 静态资源加 ETag/Last-Modified + `Cache-Control`；config GET 可内存缓存 | 重复静态/config 请求开销大幅下降 |")
+    L.append("| **P1** | 过载保护 | 引入有界线程池/队列，超载时快速返回 503 而非无限排队 | 峰值下时延可预期、fail-fast |")
+    L.append("| **P2** | 架构升级 | 迁移到 ASGI（FastAPI/uvicorn）或 gunicorn 多 worker | 长期可扩展性最佳，但改动较大 |")
+    L.append("| **P2** | 资源监控 | 压测期采集 CPU/内存/TCP 连接数 | 量化瓶颈归属（GIL/CPU-bound vs I/O-bound） |\n")
+
+    L.append("\n## 6. 一致性 & 安全缺口发现\n")
+    L.append("- **404 缺口**：前端 `digitalhuman.js`/`voice.js` 引用了 `/api/dh/<provider>` 与 `/api/tts`，但 `server.py` 未实现 → 前端调用将 404。建议补齐路由或对齐前端。")
+    L.append("- **SSRF 守卫不一致（安全）**：`/api/llm` 的 `proxy_llm()` 对 endpoint 做 https+公网 host 校验；但 `/api/heygen` 的 `proxy()` 信任 `HEYGEN_HOST` 环境变量且**不做 host 校验**。若进程环境被篡改，`HEYGEN_HOST` 可被指向内网/云元数据地址。建议对 `HEYGEN_HOST` 也套用 `_safe_target` 校验。\n")
+
+    L.append("\n## 7. 结论\n")
+    L.append("当前服务在单线程模型下，并发能力受限于“串行处理 + 同步阻塞代理”。正常流量（≤10 并发）下延迟可接受；")
+    L.append("当并发升至 50+ 时，队列延迟急剧放大，P99 可达秒级，不符合高并发场景要求。")
+    L.append("**最优先的两项修复（`ThreadingHTTPServer` 一行改动 + 代理连接池）即可释放绝大多数性能余量**，且实现成本极低。\n")
+
+    with open(OUT, "w", encoding="utf-8") as f:
+        f.write("\n".join(L))
+    print("REPORT_WRITTEN", OUT)
+
+
+if __name__ == "__main__":
+    main()
